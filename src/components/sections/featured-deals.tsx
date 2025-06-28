@@ -21,7 +21,8 @@ const FeaturedDeals = ({ maxItems = 4 }: FeaturedDealsProps) => {
     // If not enough, supplement with featured type banners
     if (featured.length < maxItems) {
       const additional = getBannersByType('featured')
-        .filter(banner => !featured.some(f => f.id === banner.id));
+        // Use brand as unique identifier since id might not be available
+        .filter(banner => !featured.some(f => f.brand === banner.brand));
       return [...featured, ...additional].slice(0, maxItems);
     }
     return featured.slice(0, maxItems);
@@ -41,9 +42,9 @@ const FeaturedDeals = ({ maxItems = 4 }: FeaturedDealsProps) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {featuredBanners.map((banner) => (
+        {featuredBanners.map((banner, index) => (
           <motion.div
-            key={banner.id}
+            key={`${banner.brand}-${index}`}
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -56,9 +57,9 @@ const FeaturedDeals = ({ maxItems = 4 }: FeaturedDealsProps) => {
                 // Track click if analytics available
                 if (window.gtag) {
                   window.gtag('event', 'affiliate_link_click', {
-                    banner_id: banner.id,
+                    banner_brand: banner.brand,
                     brand: banner.brand,
-                    type: banner.types.join(','), 
+                    type: Array.isArray(banner.types) ? banner.types.join(',') : banner.type, 
                     location: 'featured_deals'
                   });
                 }
@@ -69,7 +70,7 @@ const FeaturedDeals = ({ maxItems = 4 }: FeaturedDealsProps) => {
                   <picture>
                     <source media="(max-width: 768px)" srcSet={banner.mobileSrc} />
                     <img
-                      src={banner.src}
+                      src={banner.image}
                       alt={banner.alt}
                       className="w-full h-full object-cover"
                       loading="lazy"
@@ -80,7 +81,7 @@ const FeaturedDeals = ({ maxItems = 4 }: FeaturedDealsProps) => {
                 <div className="p-4 flex flex-col flex-1">
                   <h3 className="font-bold mb-2 line-clamp-1">{banner.brand}</h3>
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
-                    {banner.description || `Exclusive deals from ${banner.brand}`}
+                    {banner.alt || `Exclusive deals from ${banner.brand}`}
                   </p>
                   <div className="flex items-center justify-between mt-auto">
                     <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-md">

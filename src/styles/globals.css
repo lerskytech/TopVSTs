@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom classes for animation effects */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-1;
+}
+
+.glow-on-hover {
+  @apply transition-all duration-300;
+}
+
+.glow-on-hover:hover {
+  @apply shadow-lg;
+}
+
+.dark .glow-on-hover:hover {
+  @apply shadow-[0_0_15px_rgba(0,195,255,0.5)];
+}
+
+/* Parallax scroll effect */
+.parallax {
+  @apply relative overflow-hidden;
+}
+
+.parallax-bg {
+  @apply absolute w-full h-full object-cover scale-110 transition-transform duration-500;
+}
+
+/* Neon text effects */
+.neon-text-blue {
+  @apply text-neon-blue drop-shadow-[0_0_8px_rgba(0,195,255,0.8)];
+}
+
+.neon-text-purple {
+  @apply text-neon-purple drop-shadow-[0_0_8px_rgba(180,0,255,0.8)];
+}
+
+.neon-text-pink {
+  @apply text-neon-pink drop-shadow-[0_0_8px_rgba(255,0,229,0.8)];
+}
+
+.neon-text-green {
+  @apply text-neon-green drop-shadow-[0_0_8px_rgba(0,255,102,0.8)];
+}
+
+.neon-text-yellow {
+  @apply text-neon-yellow drop-shadow-[0_0_8px_rgba(255,204,0,0.8)];
+}
+
+/* Plugin card styles */
+.plugin-card {
+  @apply bg-card rounded-lg overflow-hidden border border-border transition-all duration-300;
+}
+
+.dark .plugin-card {
+  @apply hover:border-neon-blue;
+}
+
+.light .plugin-card {
+  @apply hover:border-primary hover:shadow-md;
+}
+
+/* Banner and CTA styles */
+.affiliate-banner {
+  @apply rounded-md overflow-hidden relative;
+}
+
+.cta-button {
+  @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+}
+
+.cta-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.cta-neon {
+  @apply bg-black text-neon-blue border border-neon-blue hover:bg-neon-blue/10;
+}
+
+/* Affiliate disclosure tooltip */
+.affiliate-disclosure {
+  @apply text-xs text-muted-foreground italic mt-1;
+}
+
+/* Rating stars */
+.stars-container {
+  @apply flex items-center;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  @apply fixed inset-0 bg-background/95 backdrop-blur-sm z-50 transform transition-transform duration-300;
+}

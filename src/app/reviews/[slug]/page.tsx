@@ -1,15 +1,16 @@
+import * as React from 'react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Star, Download, ThumbsUp, ThumbsDown, Check, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { parseRating, formatPrice } from '@/lib/utils'
-import AffiliateBanner from '@/components/ui/affiliate-banner'
-import ReviewScores from '@/components/reviews/review-scores'
-import ProsConsTable from '@/components/reviews/pros-cons-table'
-import FeatureTable from '@/components/reviews/feature-table'
-import RelatedPlugins from '@/components/reviews/related-plugins'
-import ReviewComments from '@/components/reviews/review-comments'
+import { Button } from '../../../components/ui/button'
+import { parseRating, formatPrice } from '../../../lib/utils'
+import AffiliateBanner from '../../../components/ui/affiliate-banner'
+import ReviewScores from '../../../components/reviews/review-scores'
+import ProsConsTable from '../../../components/reviews/pros-cons-table'
+import FeatureTable from '../../../components/reviews/feature-table'
+import RelatedPlugins from '../../../components/reviews/related-plugins'
+import ReviewComments from '../../../components/reviews/review-comments'
 
 // This would be replaced with actual data fetching in a real implementation
 async function getReviewData(slug: string) {
@@ -141,6 +142,15 @@ async function getReviewData(slug: string) {
   }
 }
 
+// Required for static export with dynamic routes
+export async function generateStaticParams() {
+  // In a real implementation, we would fetch all possible slugs from the data source
+  // For now, just returning the one mock example we have
+  return [
+    { slug: 'xfer-records-serum' },
+  ];
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const review = await getReviewData(params.slug)
   
@@ -210,12 +220,12 @@ export default async function ReviewPage({ params }: { params: { slug: string } 
             
             {/* Category */}
             <div className="text-muted-foreground">
-              Category: <Link href={`/category/${review.category.toLowerCase()}`} className="hover:text-primary hover:underline">{review.category}</Link>
+              Category: <span className="text-foreground">{review.category}</span>
             </div>
             
             {/* Brand */}
             <div className="text-muted-foreground">
-              Brand: <Link href={`/brand/${review.brand.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-primary hover:underline">{review.brand}</Link>
+              Brand: <span className="text-foreground">{review.brand}</span>
             </div>
             
             {/* Reviewed date */}

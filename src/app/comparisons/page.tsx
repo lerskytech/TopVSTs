@@ -161,7 +161,7 @@ export default function ComparisonsPage() {
   const currentCategory = categories.find(c => c.id === activeCategory)?.name || '';
   
   return (
-    <div className="container py-8">
+    <div className="container pt-20 pb-8">
       {/* Main heading */}
       <h1 className="text-3xl sm:text-4xl font-bold mb-4">Best {currentCategory} of 2025</h1>
       <p className="text-muted-foreground mb-8 max-w-3xl">

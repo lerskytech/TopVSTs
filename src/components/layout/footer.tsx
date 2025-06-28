@@ -5,12 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react'
 
-// Import sponsor data using relative path
-import sponsors, { getFeaturedSponsors } from '../../data/sponsors'
+// Import banner data using relative path
+import { getFeaturedBanners } from '../../data/banners'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-  const featuredSponsors = getFeaturedSponsors().slice(0, 6) // Limit to 6 sponsors
+  const featuredPartners = getFeaturedBanners().slice(0, 6) // Limit to 6 partner banners
 
   return (
     <footer className="bg-muted/30 border-t border-border">
@@ -129,21 +129,31 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Featured Sponsors */}
+        {/* Featured Partners */}
         <div className="mt-8 pt-6 border-t border-border">
           <h3 className="text-center text-sm font-semibold mb-4">Featured Partners</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {featuredSponsors.map((sponsor) => (
+            {featuredPartners.map((banner, index) => (
               <Link 
-                href={sponsor.affiliateLink} 
-                key={sponsor.id}
+                href={banner.link} 
+                key={`${banner.brand}-${index}`}
                 className="flex items-center justify-center p-2 bg-card hover:bg-accent rounded-md transition-colors"
                 target="_blank"
                 rel="nofollow noopener"
+                onClick={() => {
+                  // Track affiliate click
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'affiliate_link_click', {
+                      banner_brand: banner.brand,
+                      brand: banner.brand,
+                      type: Array.isArray(banner.types) ? banner.types.join(',') : banner.type,
+                      location: 'footer_partners'
+                    });
+                  }
+                }}
               >
                 <div className="relative h-8 w-24 flex items-center justify-center">
-                  {/* Using text fallback until actual logos are provided */}
-                  <span className="text-xs font-medium text-center">{sponsor.name}</span>
+                  <span className="text-xs font-medium text-center">{banner.brand}</span>
                 </div>
               </Link>
             ))}

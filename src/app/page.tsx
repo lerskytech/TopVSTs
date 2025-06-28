@@ -9,8 +9,8 @@ import Newsletter from '../components/sections/newsletter'
 import FeaturedDeals from '../components/sections/featured-deals'
 import BannerManager from '../components/banners/banner-manager'
 
-// Import sponsors data
-import { getFeaturedSponsors } from '../data/sponsors'
+// Import banner data
+import { getFeaturedBanners } from '../data/banners'
 
 export const metadata: Metadata = {
   title: 'TopVSTs - Best Music Production Plugins, Samples & Tools',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  const featuredSponsors = getFeaturedSponsors()
+  const featuredPartners = getFeaturedBanners()
   return (
     <div className="flex flex-col gap-16 pb-16">
       {/* Hero Section */}
@@ -63,22 +63,32 @@ export default function Home() {
           </p>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {featuredSponsors.map((sponsor) => (
+            {featuredPartners.map((banner, index) => (
               <a 
-                href={sponsor.affiliateLink}
-                key={sponsor.id}
+                href={banner.link}
+                key={`${banner.brand}-${index}`}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="group flex flex-col items-center p-4 bg-card hover:bg-accent rounded-lg transition-all duration-300 border border-border hover:border-primary hover-neon-effect"
+                onClick={() => {
+                  // Track affiliate click
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'affiliate_link_click', {
+                      banner_brand: banner.brand,
+                      brand: banner.brand,
+                      type: Array.isArray(banner.types) ? banner.types.join(',') : banner.type,
+                      location: 'trusted_partners'
+                    });
+                  }
+                }}
               >
                 <div className="w-full h-12 flex items-center justify-center mb-3">
-                  {/* Text placeholder until actual logos are added */}
                   <span className="font-medium text-lg group-hover:text-primary transition-colors">
-                    {sponsor.name}
+                    {banner.brand}
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground text-center line-clamp-2">
-                  {sponsor.description}
+                  {banner.alt || `Exclusive offers from ${banner.brand}`}
                 </p>
               </a>
             ))}

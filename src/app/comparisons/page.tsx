@@ -8,6 +8,7 @@ import { Star, ChevronRight, Trophy } from 'lucide-react';
 import products from '../../data/products';
 import { cn } from '../../lib/utils';
 import { Button } from '../../components/ui/button';
+import BannerManager from '../../components/banners/banner-manager';
 
 // Categories for filtering
 const categories = [
@@ -160,6 +161,10 @@ export default function ComparisonsPage() {
   // Get current category name
   const currentCategory = categories.find(c => c.id === activeCategory)?.name || '';
   
+  // Extract brands from current category for contextual banners
+  const categoryBrands = filteredProducts.map(product => product.brand);
+  const uniqueBrands = Array.from(new Set(categoryBrands));
+  
   return (
     <div className="container pt-20 pb-8">
       {/* Main heading */}
@@ -167,6 +172,11 @@ export default function ComparisonsPage() {
       <p className="text-muted-foreground mb-8 max-w-3xl">
         Our expert team tests and compares the latest music production tools to help you find the best options for your studio. Updated monthly with the newest releases and features.
       </p>
+      
+      {/* Hero Banner */}
+      <div className="mb-10">
+        <BannerManager showHero={true} />
+      </div>
       
       {/* Category selection */}
       <div className="flex flex-wrap gap-2 mb-8">
@@ -183,34 +193,60 @@ export default function ComparisonsPage() {
       </div>
       
       <div className="mt-4">
-        {/* Tiers */}
-        <TierSection
-          title="S-Tier: The Absolute Best"
-          description="Industry-leading products with exceptional quality and features"
-          color="bg-gradient-to-r from-amber-500 to-orange-600"
-          products={sTier}
-        />
-        
-        <TierSection
-          title="A-Tier: Excellent Options"
-          description="Outstanding products with great features and performance"
-          color="bg-gradient-to-r from-blue-500 to-indigo-600"
-          products={aTier}
-        />
-        
-        <TierSection
-          title="B-Tier: Solid Choices"
-          description="Good products that deliver solid results at competitive prices"
-          color="bg-gradient-to-r from-emerald-500 to-teal-600"
-          products={bTier}
-        />
-        
-        {/* Show placeholder if few products */}
-        {filteredProducts.length < 3 && (
-          <div className="mt-12">
-            <ComingSoon />
+        {/* Flexible banner system layout */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Main content column */}
+          <div className="flex-1">
+            {/* Tiers */}
+            <TierSection
+              title="S-Tier: The Absolute Best"
+              description="Industry-leading products with exceptional quality and features"
+              color="bg-gradient-to-r from-amber-500 to-orange-600"
+              products={sTier}
+            />
+            
+            <TierSection
+              title="A-Tier: Excellent Options"
+              description="Outstanding products with great features and performance"
+              color="bg-gradient-to-r from-blue-500 to-indigo-600"
+              products={aTier}
+            />
+            
+            <TierSection
+              title="B-Tier: Solid Choices"
+              description="Good products that deliver solid results at competitive prices"
+              color="bg-gradient-to-r from-emerald-500 to-teal-600"
+              products={bTier}
+            />
+            
+            {/* Show placeholder if few products */}
+            {filteredProducts.length < 3 && (
+              <div className="mt-12">
+                <ComingSoon />
+              </div>
+            )}
           </div>
-        )}
+          
+          {/* Sticky sidebar with relevant banners */}
+          <div className="w-full lg:w-64">
+            <div className="sticky top-24">
+              <BannerManager 
+                showSidebar={true} 
+                relatedBrands={uniqueBrands} 
+                pageCategory={currentCategory} 
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Contextual banners before methodology */}
+      <div className="my-8">
+        <BannerManager 
+          showContextual={true} 
+          relatedBrands={uniqueBrands} 
+          pageCategory={currentCategory}
+        />
       </div>
       
       {/* Methodology section */}
@@ -242,6 +278,11 @@ export default function ComparisonsPage() {
           </div>
         </div>
       </section>
+      
+      {/* Bottom banner */}
+      <div className="mt-12">
+        <BannerManager showBottom={true} />
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Star } from 'lucide-react'
 import { formatPrice, parseRating } from '../../lib/utils'
 import { Button } from '../../components/ui/button'
-import AffiliateBanner from '../../components/ui/affiliate-banner'
+import BannerManager from '../../components/banners/banner-manager'
 
 export const metadata: Metadata = {
   title: 'Plugin Reviews | TopVSTs',
@@ -129,6 +129,9 @@ const categories = Array.from(new Set(reviews.map(review => review.category)))
 const brands = Array.from(new Set(reviews.map(review => review.brand)))
 
 export default function ReviewsPage() {
+  // Extract category and brand names for contextual banners
+  const allBrands = Array.from(new Set(reviews.map(review => review.brand)))
+  
   return (
     <div className="container pt-20 pb-8">
 
@@ -142,16 +145,10 @@ export default function ReviewsPage() {
 
       {/* Featured Banner */}
       <div className="mb-10">
-        <AffiliateBanner
-          src="/img/banners/reviews-featured.jpg"
-          mobileSrc="/img/banners/reviews-featured-mobile.jpg"
-          alt="Featured Plugin Deal"
-          href="https://example.com/featured-deal"
-          size="large"
-        />
+        <BannerManager showHero={true} />
       </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+      
+      <div className="flex flex-col md:flex-row gap-8">
         {/* Filters Sidebar */}
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-card border border-border rounded-lg p-6">
@@ -268,26 +265,14 @@ export default function ReviewsPage() {
             </Button>
           </div>
           
-          {/* Sidebar Banners */}
-          <div className="space-y-4">
-            <AffiliateBanner
-              src="/img/banners/sidebar-1.jpg"
-              alt="Special Offer"
-              href="https://example.com/affiliate-sidebar-1"
-              size="small"
-            />
-            
-            <AffiliateBanner
-              src="/img/banners/sidebar-2.jpg"
-              alt="Limited Time Deal"
-              href="https://example.com/affiliate-sidebar-2"
-              size="small"
-            />
+          {/* Sticky sidebar banner */}
+          <div className="mt-8">
+            <BannerManager showSidebar={true} relatedBrands={allBrands} pageCategory="Plugins" />
           </div>
         </div>
         
-        {/* Reviews List */}
-        <div className="lg:col-span-3">
+        {/* Main Content */}
+        <div className="flex-1">
           {/* Sorting Controls */}
           <div className="flex justify-between items-center mb-6">
             <div className="text-sm text-muted-foreground">
@@ -409,6 +394,11 @@ export default function ReviewsPage() {
             })}
           </div>
           
+          {/* Contextual banners between content and pagination */}
+          <div className="my-8">
+            <BannerManager showContextual={true} relatedBrands={allBrands} pageCategory="Plugins" />
+          </div>
+          
           {/* Pagination */}
           <div className="flex justify-center mt-10">
             <nav className="flex items-center gap-1">
@@ -440,6 +430,11 @@ export default function ReviewsPage() {
             </nav>
           </div>
         </div>
+      </div>
+      
+      {/* Bottom banner */}
+      <div className="mt-12">
+        <BannerManager showBottom={true} />
       </div>
     </div>
   )

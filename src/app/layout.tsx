@@ -1,10 +1,11 @@
-import '@/styles/globals.css'
+import '../styles/globals.css'
 import type { Metadata } from 'next'
+import * as React from 'react'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
-import Navbar from '@/components/layout/navbar'
-import Footer from '@/components/layout/footer'
-import CookieBanner from '@/components/layout/cookie-banner'
+import { ThemeProvider } from '../components/theme-provider'
+import Navbar from '../components/layout/navbar'
+import Footer from '../components/layout/footer'
+import CookieBanner from '../components/ui/cookie-banner'
 
 const inter = Inter({ subsets: ['latin'] })
 

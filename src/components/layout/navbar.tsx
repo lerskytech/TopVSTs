@@ -1,12 +1,16 @@
 "use client"
 
+import * as React from 'react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { Search, Menu, X, Sun, Moon } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+// Using relative imports as required
+import { cn } from '../../lib/utils'
+import { Button } from '../../components/ui/button'
+// Import sponsor bar component
+import SponsorBar from '../../components/ui/sponsor-bar'
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -20,7 +24,7 @@ const navLinks = [
   { name: 'Contact', href: '/contact' }
 ]
 
-export default function Navbar() {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -127,6 +131,9 @@ export default function Navbar() {
             />
           </div>
         </div>
+        
+        {/* Sponsor Bar */}
+        <SponsorBar className="mt-2" />
       </header>
 
       {/* Mobile Menu */}
@@ -167,3 +174,5 @@ export default function Navbar() {
     </>
   )
 }
+
+export default Navbar;

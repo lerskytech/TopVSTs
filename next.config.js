@@ -2,9 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com', 'via.placeholder.com'],
-    formats: ['image/avif', 'image/webp'],
+    domains: ['placehold.co'],
+    unoptimized: true,
   },
+  output: 'export',
+  assetPrefix: '',
+  trailingSlash: true,
   eslint: {
     dirs: ['src'],
   },

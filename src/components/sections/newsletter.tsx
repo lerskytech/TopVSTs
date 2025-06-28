@@ -1,9 +1,10 @@
 "use client"
 
+import * as React from 'react'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../components/ui/button'
 import { Mail, Check } from 'lucide-react'
 
 export default function Newsletter() {

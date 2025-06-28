@@ -1,11 +1,16 @@
 "use client"
 
+import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react'
 
-export default function Footer() {
+// Import sponsor data using relative path
+import sponsors, { getFeaturedSponsors } from '../../data/sponsors'
+
+const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const featuredSponsors = getFeaturedSponsors().slice(0, 6) // Limit to 6 sponsors
 
   return (
     <footer className="bg-muted/30 border-t border-border">
@@ -124,6 +129,27 @@ export default function Footer() {
           </div>
         </div>
         
+        {/* Featured Sponsors */}
+        <div className="mt-8 pt-6 border-t border-border">
+          <h3 className="text-center text-sm font-semibold mb-4">Featured Partners</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {featuredSponsors.map((sponsor) => (
+              <Link 
+                href={sponsor.affiliateLink} 
+                key={sponsor.id}
+                className="flex items-center justify-center p-2 bg-card hover:bg-accent rounded-md transition-colors"
+                target="_blank"
+                rel="nofollow noopener"
+              >
+                <div className="relative h-8 w-24 flex items-center justify-center">
+                  {/* Using text fallback until actual logos are provided */}
+                  <span className="text-xs font-medium text-center">{sponsor.name}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+        
         <div className="mt-6 text-xs text-center text-muted-foreground">
           <p className="affiliate-disclosure">
             TopVSTs.com is reader-supported. When you buy through links on our site, we may earn an affiliate commission.
@@ -133,3 +159,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer

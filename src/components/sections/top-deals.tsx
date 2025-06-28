@@ -1,10 +1,12 @@
 "use client"
 
+import * as React from 'react'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import PluginCard from '@/components/ui/plugin-card'
+import { Button } from '../../components/ui/button'
+import PluginCard from '../../components/ui/plugin-card'
 
 // Mock data - would be fetched from API/database in real implementation
 const dealsData = [
@@ -136,9 +138,11 @@ export default function TopDeals() {
             <ChevronRight className="h-4 w-4" />
           </Button>
           
-          <Button variant="link" href="/deals" className="ml-2">
-            View All Deals
-          </Button>
+          <Link href="/deals" className="ml-2">
+            <Button variant="link">
+              View All Deals
+            </Button>
+          </Link>
         </div>
       </div>
       

@@ -1,11 +1,12 @@
 "use client"
 
+import * as React from 'react'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import { Button } from '../ui/button'
 import { Star, ThumbsUp, MessageSquare } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 // Mock data for example comments
 const mockComments = [

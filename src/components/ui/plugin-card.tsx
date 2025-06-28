@@ -1,9 +1,10 @@
 "use client"
 
+import * as React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Star, ChevronRight, Tag } from 'lucide-react'
-import { cn, formatPrice, parseRating } from '@/lib/utils'
+import { cn, formatPrice, parseRating } from '../../lib/utils'
 
 interface PluginCardProps {
   id: string

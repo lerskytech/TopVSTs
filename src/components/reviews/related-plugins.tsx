@@ -1,11 +1,12 @@
 "use client"
 
+import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Star, ChevronRight } from 'lucide-react'
-import { formatPrice, parseRating } from '@/lib/utils'
+import { formatPrice, parseRating } from '../../lib/utils'
 
 interface RelatedPlugin {
   id: string
@@ -90,11 +91,11 @@ export default function RelatedPlugins({ plugins }: RelatedPluginsProps) {
                   <div className="flex items-baseline gap-1">
                     {isOnSale ? (
                       <>
-                        <span className="font-bold text-sm">{formatPrice(plugin.salePrice)}</span>
-                        <span className="text-xs text-muted-foreground line-through">{formatPrice(plugin.price)}</span>
+                        <span className="font-bold text-sm">{formatPrice(plugin.salePrice ?? 0)}</span>
+                        <span className="text-xs text-muted-foreground line-through">{formatPrice(plugin.price ?? 0)}</span>
                       </>
                     ) : (
-                      <span className="font-bold text-sm">{formatPrice(plugin.price)}</span>
+                      <span className="font-bold text-sm">{formatPrice(plugin.price ?? 0)}</span>
                     )}
                   </div>
                   

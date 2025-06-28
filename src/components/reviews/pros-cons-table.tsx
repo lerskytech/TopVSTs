@@ -1,9 +1,10 @@
 "use client"
 
+import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { Check, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 interface ProsConsTableProps {
   pros: string[]

@@ -4,49 +4,154 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Base Theme Colors */
+    --background: 220 20% 97%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --primary: 220 45% 15%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --secondary: 215 25% 92%;
+    --secondary-foreground: 220 45% 15%;
+    --muted: 220 15% 95%;
+    --muted-foreground: 240 5% 45%;
+    --accent: 220 15% 92%;
+    --accent-foreground: 220 45% 15%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 220 45% 15%;
     --radius: 0.5rem;
+
+    /* TopVSTs Custom Neon Colors */
+    --neon-blue: 210 100% 50%;
+    --neon-blue-glow: 210 100% 50%;
+    --neon-green: 140 100% 50%;
+    --neon-green-glow: 140 100% 50%;
+    --neon-pink: 330 100% 50%;
+    --neon-pink-glow: 330 100% 50%;
+    --neon-purple: 270 100% 50%;
+    --neon-purple-glow: 270 100% 50%;
+
+    /* Brand Colors */
+    --brand-primary: 220 70% 50%;
+    --brand-secondary: 270 70% 50%;
+    --brand-accent: 330 80% 50%;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    /* Dark Theme Colors */
+    --background: 230 25% 8%;
+    --foreground: 210 20% 98%;
+    --card: 230 25% 9.5%;
+    --card-foreground: 210 20% 98%;
+    --popover: 230 25% 8%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 90%;
+    --primary-foreground: 220 45% 15%;
+    --secondary: 230 25% 15%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 230 25% 15%;
+    --muted-foreground: 240 5% 75%;
+    --accent: 230 25% 15%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 230 25% 20%;
+    --input: 230 25% 20%;
+    --ring: 210 20% 90%;
+
+    /* Neon Colors with Glow Effects in Dark Mode */
+    --neon-blue: 195 100% 60%;
+    --neon-blue-glow: 195 100% 50%;
+    --neon-green: 130 100% 60%;
+    --neon-green-glow: 130 100% 50%;
+    --neon-pink: 330 100% 60%;
+    --neon-pink-glow: 330 100% 50%;
+    --neon-purple: 285 100% 60%;
+    --neon-purple-glow: 285 100% 55%;
+
+    /* Dark Mode Brand Colors */
+    --brand-primary: 220 80% 65%;
+    --brand-secondary: 270 80% 65%;
+    --brand-accent: 330 90% 65%;
   }
+}
+
+/* Base Styles */
+body {
+  @apply bg-background text-foreground transition-colors duration-300;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold tracking-tight;
+}
+
+/* Neon Text Effects */
+.text-neon-blue {
+  color: hsl(var(--neon-blue));
+  text-shadow: 0 0 5px hsla(var(--neon-blue-glow) / 0.7),
+               0 0 15px hsla(var(--neon-blue-glow) / 0.5),
+               0 0 30px hsla(var(--neon-blue-glow) / 0.3);
+}
+
+.text-neon-green {
+  color: hsl(var(--neon-green));
+  text-shadow: 0 0 5px hsla(var(--neon-green-glow) / 0.7),
+               0 0 15px hsla(var(--neon-green-glow) / 0.5),
+               0 0 30px hsla(var(--neon-green-glow) / 0.3);
+}
+
+.text-neon-pink {
+  color: hsl(var(--neon-pink));
+  text-shadow: 0 0 5px hsla(var(--neon-pink-glow) / 0.7),
+               0 0 15px hsla(var(--neon-pink-glow) / 0.5),
+               0 0 30px hsla(var(--neon-pink-glow) / 0.3);
+}
+
+.text-neon-purple {
+  color: hsl(var(--neon-purple));
+  text-shadow: 0 0 5px hsla(var(--neon-purple-glow) / 0.7),
+               0 0 15px hsla(var(--neon-purple-glow) / 0.5),
+               0 0 30px hsla(var(--neon-purple-glow) / 0.3);
+}
+
+/* Container Styles */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+/* Sponsor Bar */
+.sponsor-scroll {
+  @apply overflow-hidden whitespace-nowrap;
+}
+
+.sponsor-scroll-inner {
+  @apply inline-flex animate-[scroll_30s_linear_infinite];
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Button and Interactive Element Hover Effects */
+.hover-neon-effect {
+  @apply transition-all duration-300;
+}
+
+.hover-neon-effect:hover {
+  filter: drop-shadow(0 0 5px hsla(var(--neon-blue-glow) / 0.7));
+}
+
+/* Affiliate Disclosure */
+.affiliate-disclosure {
+  @apply text-xs text-muted-foreground italic mt-2;
 }
 
 @layer base {

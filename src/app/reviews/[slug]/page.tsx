@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Star, Download, ThumbsUp, ThumbsDown, Check, X } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { parseRating, formatPrice } from '../../../lib/utils'
-import AffiliateBanner from '../../../components/ui/affiliate-banner'
+import BannerManager from '../../../components/banners/banner-manager'
 import ReviewScores from '../../../components/reviews/review-scores'
 import ProsConsTable from '../../../components/reviews/pros-cons-table'
 import FeatureTable from '../../../components/reviews/feature-table'
@@ -313,6 +313,15 @@ export default async function ReviewPage({ params }: { params: { slug: string } 
         />
       </div>
 
+      {/* Contextual Banner - Related to the review's brand/category */}
+      <div className="mb-8">
+        <BannerManager 
+          showContextual={true} 
+          relatedBrands={[review.brand]} 
+          pageCategory={review.category} 
+        />
+      </div>
+
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
@@ -365,18 +374,12 @@ export default async function ReviewPage({ params }: { params: { slug: string } 
         
         {/* Sidebar */}
         <div className="space-y-8">
-          {/* Affiliate Banners */}
+          {/* Affiliate Banners - Using BannerManager for contextual banners */}
           <div className="space-y-4">
-            <AffiliateBanner
-              src="/img/banners/sidebar-1.jpg"
-              alt="Special Offer"
-              href="https://example.com/affiliate-sidebar-1"
-            />
-            
-            <AffiliateBanner
-              src="/img/banners/sidebar-2.jpg"
-              alt="Limited Time Deal"
-              href="https://example.com/affiliate-sidebar-2"
+            <BannerManager 
+              showSidebar={true} 
+              relatedBrands={[review.brand]} 
+              pageCategory={review.category} 
             />
           </div>
           

@@ -1,8 +1,9 @@
 "use client"
 
+import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 interface Feature {
   name: string

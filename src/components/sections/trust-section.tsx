@@ -1,11 +1,12 @@
 "use client"
 
+import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../components/ui/button'
 
 // Mock testimonial data
 const testimonials = [

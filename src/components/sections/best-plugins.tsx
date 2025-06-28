@@ -1,9 +1,11 @@
 "use client"
 
+import * as React from 'react'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import PluginCard from '@/components/ui/plugin-card'
+import Link from 'next/link'
+import { Button } from '../../components/ui/button'
+import PluginCard from '../../components/ui/plugin-card'
 
 const categories = [
   'All', 'Synths', 'Effects', 'Mixing', 'Mastering', 'Instruments'
@@ -145,9 +147,11 @@ export default function BestPlugins() {
       </div>
       
       <div className="flex justify-center mt-8">
-        <Button variant="outline" href="/reviews">
-          View All Plugins
-        </Button>
+        <Link href="/reviews">
+          <Button variant="outline">
+            View All Plugins
+          </Button>
+        </Link>
       </div>
     </section>
   )

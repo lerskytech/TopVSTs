@@ -162,31 +162,6 @@ export default function ComparisonsPage() {
   
   return (
     <div className="container py-8">
-      {/* Breadcrumb */}
-      <nav className="flex mb-4 text-sm text-muted-foreground">
-        <ol className="flex items-center space-x-1">
-          <li>
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          </li>
-          <li>
-            <ChevronRight className="h-4 w-4" />
-          </li>
-          <li>
-            <span className="text-foreground">Comparisons</span>
-          </li>
-          {activeCategory && (
-            <>
-              <li>
-                <ChevronRight className="h-4 w-4" />
-              </li>
-              <li>
-                <span className="text-foreground">{currentCategory}</span>
-              </li>
-            </>
-          )}
-        </ol>
-      </nav>
-      
       {/* Main heading */}
       <h1 className="text-3xl sm:text-4xl font-bold mb-4">Best {currentCategory} of 2025</h1>
       <p className="text-muted-foreground mb-8 max-w-3xl">

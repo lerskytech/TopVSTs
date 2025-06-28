@@ -163,10 +163,16 @@ const banners = [
  * Helper functions to filter banners by type, brand, etc.
  */
 
-// Get banners by type
+// Get banners by type - supports both single type and array of types format
 export const getBannersByType = (type) => {
-  return banners.filter(banner => banner.type === type)
-    .sort((a, b) => (b.priority || 0) - (a.priority || 0));
+  return banners.filter(banner => {
+    // Handle multi-type banners (an array of types)
+    if (Array.isArray(banner.types)) {
+      return banner.types.includes(type);
+    }
+    // Handle single type banners (legacy format)
+    return banner.type === type;
+  }).sort((a, b) => (b.priority || 0) - (a.priority || 0));
 };
 
 // Get banners by brand
@@ -175,16 +181,37 @@ export const getBannersByBrand = (brand) => {
     .sort((a, b) => (b.priority || 0) - (a.priority || 0));
 };
 
-// Get active seasonal banners
-export const getActiveSeasonalBanners = () => {
-  const today = new Date();
+// Get featured banners (high priority banners intended for featured sections)
+export const getFeaturedBanners = () => {
+  // First try to get banners explicitly marked for featured placement
+  const featuredBanners = banners.filter(banner => {
+    if (Array.isArray(banner.types)) {
+      return banner.types.includes('featured');
+    }
+    return banner.type === 'featured';
+  });
+  
+  // Sort by priority (highest first)
+  return featuredBanners.sort((a, b) => (b.priority || 0) - (a.priority || 0));
+};
+
+// Get relevant banners for a specific brand or category
+export const getContextualBanners = (relatedBrands = [], pageCategory = '') => {
+  if (!relatedBrands.length && !pageCategory) return [];
+  
   return banners.filter(banner => {
-    if (banner.type !== 'seasonal') return false;
+    // Match by brand
+    if (relatedBrands.length && relatedBrands.includes(banner.brand)) {
+      return true;
+    }
     
-    const startDate = banner.startDate ? new Date(banner.startDate) : null;
-    const endDate = banner.endDate ? new Date(banner.endDate) : null;
+    // Match by category keyword if specified in banner metadata
+    if (pageCategory && banner.categories && banner.categories.some(cat => 
+      pageCategory.toLowerCase().includes(cat.toLowerCase()))) {
+      return true;
+    }
     
-    return (!startDate || today >= startDate) && (!endDate || today <= endDate);
+    return false;
   }).sort((a, b) => (b.priority || 0) - (a.priority || 0));
 };
 
@@ -204,5 +231,32 @@ export const getRandomBanners = (type, count = 1) => {
   // Return the requested number of banners
   return shuffled.slice(0, count);
 };
+
+// Get active seasonal banners
+export const getSeasonalBanners = () => {
+  const now = new Date();
+  
+  return banners
+    .filter(banner => {
+      // Check if it's a seasonal banner
+      if (banner.type !== 'seasonal' && !(Array.isArray(banner.types) && banner.types.includes('seasonal'))) {
+        return false;
+      }
+      
+      // Check date range if specified
+      if (banner.startDate && banner.endDate) {
+        const start = new Date(banner.startDate);
+        const end = new Date(banner.endDate);
+        return now >= start && now <= end;
+      }
+      
+      // If no dates specified but marked seasonal, show it
+      return true;
+    })
+    .sort((a, b) => (b.priority || 0) - (a.priority || 0));
+};
+
+// Alias for backward compatibility
+export const getActiveSeasonalBanners = getSeasonalBanners;
 
 export default banners;

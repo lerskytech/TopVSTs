@@ -1,10 +1,11 @@
+import * as React from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Star } from 'lucide-react'
-import { formatPrice, parseRating } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import AffiliateBanner from '@/components/ui/affiliate-banner'
+import { formatPrice, parseRating } from '../../lib/utils'
+import { Button } from '../../components/ui/button'
+import AffiliateBanner from '../../components/ui/affiliate-banner'
 
 export const metadata: Metadata = {
   title: 'Plugin Reviews | TopVSTs',
@@ -129,17 +130,7 @@ const brands = Array.from(new Set(reviews.map(review => review.brand)))
 
 export default function ReviewsPage() {
   return (
-    <div className="container py-8">
-      {/* Breadcrumb */}
-      <nav className="flex mb-4 text-sm">
-        <ol className="flex items-center gap-2">
-          <li>
-            <Link href="/" className="text-muted-foreground hover:text-foreground">Home</Link>
-          </li>
-          <li className="text-muted-foreground">/</li>
-          <li>Reviews</li>
-        </ol>
-      </nav>
+    <div className="container pt-20 pb-8">
 
       {/* Page Title */}
       <div className="mb-8">

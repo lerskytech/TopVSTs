@@ -9,39 +9,48 @@ import BannerCarousel from '../sponsors/BannerCarousel';
 // Hard-coded banner data for WA Production
 const waprodBanners = [
   {
-    name: "InstaComposer",
+    name: "WA InstaComposer",
     product: "InstaComposer - AI Powered MIDI Generator",
-    banner: "/banners/waprod-instacomposer-1x1.png", 
-    link: "https://www.waproduction.com/plugins/view/instacomposer",
+    banner: "/banners/waprod-instacomposer-square.jpg", 
+    link: "https://www.waproduction.com/plugins/view/instacomposer?ref=topvsts",
     shape: "1:1",
     alt: "InstaComposer AI Powered MIDI Generator - WA Production",
     featured: true
   },
   {
-    name: "Ultimate MIDI Bundle",
+    name: "WA Ultimate MIDI Bundle",
     product: "Ultimate MIDI Bundle - Complete MIDI Collection",
-    banner: "/banners/waprod-ultimate-midi-bundle-1x1.png",
-    link: "https://www.waproduction.com/bundles",
+    banner: "/banners/waprod-midibundle-square.jpg",
+    link: "https://www.waproduction.com/bundles/view/ultimate-midi-bundle?ref=topvsts",
     shape: "1:1",
     alt: "Ultimate MIDI Bundle - Complete MIDI Collection from WA Production",
     featured: true
   },
   {
-    name: "MIDIQ Horizontal",
+    name: "WA MIDIQ",
     product: "MIDIQ - MIDI Programming Assistant",
-    banner: "/banners/waprod-midiq-horizontal-1.png",
-    link: "https://www.waproduction.com/plugins/view/midiq",
+    banner: "/banners/waprod-midiq-horizontal.jpg",
+    link: "https://www.waproduction.com/plugins/view/midiq?ref=topvsts",
     shape: "horizontal",
     alt: "MIDIQ - MIDI Programming Assistant from WA Production",
     featured: false
   },
   {
-    name: "Membership",
+    name: "WA Membership",
     product: "WA Production Membership - All Access Pass",
-    banner: "/banners/waprod-membership-horizontal-1.png",
-    link: "https://www.waproduction.com/subscribe/new",
+    banner: "/banners/waprod-membership-horizontal.jpg",
+    link: "https://www.waproduction.com/subscribe/new?ref=topvsts",
     shape: "horizontal",
     alt: "WA Production Membership - All Access Pass",
+    featured: true
+  },
+  {
+    name: "WA All Products Bundle",
+    product: "All Products Bundle - Everything WA Production",
+    banner: "/banners/waprod-all-products-horizontal.jpg",
+    link: "https://www.waproduction.com/bundles/view/all-products-bundle?ref=topvsts",
+    shape: "horizontal",
+    alt: "All Products Bundle from WA Production",
     featured: true
   }
 ];
@@ -60,9 +69,6 @@ const WAProdShowcase = () => {
 
   return (
     <div className="space-y-8">
-      <div style={{background: 'red', color: 'white', padding: '10px', textAlign: 'center', fontWeight: 'bold', marginBottom: '10px'}}>
-        WA PRODUCTION TEST - {new Date().toLocaleTimeString()}
-      </div>
       <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-bold">WA Production Deals</h2>
         <p className="text-muted-foreground mt-2">

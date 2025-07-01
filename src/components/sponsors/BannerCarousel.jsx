@@ -125,19 +125,18 @@ const BannerCarousel = ({
               }}
             >
               <div className="relative">
-                {/* Directly show fallback since we know images don't exist yet */}
-                <div 
-                  className={`banner-fallback flex items-center justify-center bg-muted p-6 ${getBannerAspectRatio(currentBanner)}`}
-                  style={{
-                    minHeight: '200px'
-                  }}
-                >
+                {/* Directly show fallback since images don't exist */}
+                <div className={`banner-fallback flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 p-6 shadow-inner ${getBannerAspectRatio(currentBanner)}`} style={{ minHeight: '200px' }}>
                   <div className="text-center">
+                    <div className="mb-3 opacity-70">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mx-auto"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                    </div>
                     <p className="font-bold text-lg">{getBannerProduct(currentBanner)}</p>
-                    <p className="text-muted-foreground text-sm mt-2">
-                      {getBannerName(currentBanner).includes('WA') ? 'WA Production' : getBannerName(currentBanner)}
-                    </p>
-                    <p className="text-xs mt-3 text-primary">View Deal</p>
+                    <p className="text-muted-foreground text-sm mt-2">{getBannerName(currentBanner).includes('WA') ? 'WA Production' : getBannerName(currentBanner)}</p>
+                    <div className="mt-3 inline-flex items-center justify-center border border-primary bg-primary/10 hover:bg-primary/20 text-primary rounded-lg px-3 py-1 text-sm font-medium transition-all">
+                      View Deal
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -35,8 +35,7 @@ export default function Home() {
       
       {/* WA Production Showcase */}
       <section className="container mt-8">
-        <div className="border-4 border-red-500 rounded-lg p-6">
-          <h2 className="text-3xl font-bold text-center text-red-500 mb-4">WA PRODUCTION BANNERS SECTION</h2>
+        <div className="bg-muted/30 rounded-lg p-6">
           <WAProdShowcase />
         </div>
       </section>

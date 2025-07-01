@@ -9,6 +9,8 @@ import Newsletter from '../components/sections/newsletter'
 import FeaturedDeals from '../components/sections/featured-deals'
 import BannerManager from '../components/banners/banner-manager'
 import PartnerShowcase from '../components/sections/partner-showcase'
+import FeaturedSponsor from '../components/sections/featured-sponsor'
+import WAProdShowcase from '../components/sections/wa-prod-showcase'
 
 export const metadata: Metadata = {
   title: 'TopVSTs - Best Music Production Plugins, Samples & Tools',
@@ -24,6 +26,18 @@ export default function Home() {
       {/* Top Deals Today */}
       <section className="container">
         <TopDeals />
+      </section>
+      
+      {/* Featured Sponsor - SoundRAW */}
+      <section className="container">
+        <FeaturedSponsor />
+      </section>
+      
+      {/* WA Production Showcase */}
+      <section className="container mt-8">
+        <div className="bg-muted/30 rounded-lg p-6">
+          <WAProdShowcase />
+        </div>
       </section>
       
       {/* Featured Deals - Using BannerManager */}
